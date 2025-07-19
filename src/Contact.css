@@ -1,0 +1,146 @@
+.contact-layout {
+  min-height: 100vh;
+}
+
+.contact-header {
+  background: #ff6b00 !important;
+}
+
+.current-page {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.contact-content {
+  margin-top: 64px;
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  background: #f5f5f5;
+}
+
+.contact-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contact-card {
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.contact-intro {
+  font-size: 16px;
+  max-width: 800px;
+  margin: 16px auto 24px;
+  text-align: center;
+  color: #555;
+}
+
+.contact-info-section {
+  margin: 24px 0;
+}
+
+.contact-info-card {
+  height: 100%;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+  font-size: 36px;
+  color: #ff6b00;
+  margin-bottom: 16px;
+}
+
+.contact-detail {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.contact-detail a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.contact-detail a:hover {
+  text-decoration: underline;
+}
+
+.contact-note {
+  color: #888;
+  font-size: 14px;
+}
+
+.follow-us-title {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.follow-us-text {
+  text-align: center;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .contact-header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0;
+  }
+
+  .contact-header .nav-controls {
+    margin-top: 8px;
+  }
+
+  .current-page {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  .contact-content {
+    padding: 16px;
+    margin-top: 100px;
+  }
+
+  .contact-card {
+    padding: 16px;
+  }
+
+  .contact-info-card {
+    margin-bottom: 16px;
+  }
+
+  .contact-icon {
+    font-size: 28px;
+  }
+
+  .contact-detail {
+    font-size: 16px;
+  }
+}

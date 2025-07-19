@@ -1,0 +1,117 @@
+.terms-layout {
+  min-height: 100vh;
+}
+
+.terms-header {
+  background: #ff6b00 !important;
+}
+
+.current-page {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.terms-content {
+  margin-top: 64px;
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  background: #f5f5f5;
+}
+
+.terms-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.terms-card {
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  background: #fff;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.terms-intro {
+  font-size: 16px;
+  max-width: 800px;
+  margin: 8px auto 16px;
+  text-align: center;
+  color: #555;
+}
+
+.terms-section {
+  margin: 32px 0;
+  padding: 0 8px;
+  text-align: left;
+}
+
+.terms-section h3 {
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.terms-section p {
+  margin-bottom: 16px;
+  color: #555;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.terms-list {
+  margin-left: 24px;
+  margin-bottom: 16px;
+  padding-left: 2rem;
+}
+
+.terms-list li {
+  margin-bottom: 8px;
+  color: #555;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .terms-header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0;
+  }
+
+  .terms-header .nav-controls {
+    margin-top: 8px;
+  }
+
+  .current-page {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  
+  .terms-content {
+    padding: 8px;
+    margin-top: 100px;
+  }
+
+  .terms-card {
+    padding: 12px;
+    max-width: 100%;
+  }
+  .terms-section {
+    margin: 20px 0;
+    padding: 0 2px;
+  }
+}
