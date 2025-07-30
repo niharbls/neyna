@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import {Tabs, Layout, Typography, List, Card, Input, Button, Modal, Spin, Tooltip} from 'antd';
+import {Tabs, Layout, Typography, List, Card, Input, Button, Modal, Spin, Tooltip, Drawer} from 'antd';
 import { 
   FileOutlined, 
   PictureOutlined, 
@@ -11,7 +11,8 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined,
   ReloadOutlined,
-  FileTextOutlined
+  FileTextOutlined,
+  MenuOutlined
 } from '@ant-design/icons';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Contact from './Contact';
@@ -42,38 +43,52 @@ function HomePage() {
     const [pdfZoomLevel, setPdfZoomLevel] = useState<number>(1);
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
     const pdfContainerRef = useRef<HTMLDivElement>(null);
 
     // Load files from public folder
 
-    // Function to get files from public folder
+    // Function to dynamically get files from public folder
     const getPublicFiles = () => {
         try {
             const pdfFiles: FileItem[] = [];
             const imageFiles: FileItem[] = [];
 
-            // Get all files from public directory
-            const req = import.meta.glob('/public/**/*.*');
+            // Get all PDF files from public/pdfs directory
+            const pdfModules = import.meta.glob('/public/pdfs/*.pdf', { eager: false });
+            
+            // Get all image files from public/images directory
+            const imageModules = import.meta.glob('/public/images/*.{png,jpg,jpeg,gif,webp,avif}', { eager: false });
 
-            Object.keys(req).forEach(key => {
+            // Process PDF files
+            Object.keys(pdfModules).forEach(key => {
                 const fileName = key.split('/').pop() || '';
                 const relativePath = key.replace('/public', '');
-
-                if (fileName.match(/\.(pdf)$/i)) {
-                    pdfFiles.push({
-                        name: fileName,
-                        path: relativePath,
-                        thumbnail: relativePath
-                    });
-                } else if (fileName.match(/\.(png|jpg|jpeg|gif)$/i)) {
-                    imageFiles.push({
-                        name: fileName,
-                        path: relativePath,
-                        thumbnail: relativePath
-                    });
-                }
+                
+                console.log('Found PDF:', fileName, 'at path:', relativePath);
+                
+                pdfFiles.push({
+                    name: fileName,
+                    path: relativePath,
+                    thumbnail: relativePath
+                });
             });
 
+            // Process image files
+            Object.keys(imageModules).forEach(key => {
+                const fileName = key.split('/').pop() || '';
+                const relativePath = key.replace('/public', '');
+                
+                console.log('Found Image:', fileName, 'at path:', relativePath);
+                
+                imageFiles.push({
+                    name: fileName,
+                    path: relativePath,
+                    thumbnail: relativePath
+                });
+            });
+
+            console.log(`Loaded ${pdfFiles.length} PDF files and ${imageFiles.length} image files`);
             return {pdfFiles, imageFiles};
         } catch (error) {
             console.error('Error loading files:', error);
@@ -82,22 +97,42 @@ function HomePage() {
     };
 
     useEffect(() => {
-        try {
-            // Get files from public folder
-            const { pdfFiles, imageFiles } = getPublicFiles();
-            
-            // Update state with the files
-            setPdfs(pdfFiles);
-            setImages(imageFiles);
-            
-            // Log success message
-            console.log(`Loaded ${pdfFiles.length} PDF files and ${imageFiles.length} image files`);
-        } catch (error) {
-            // Log error and set empty arrays to prevent the application from crashing
-            console.error('Error loading files:', error);
-            setPdfs([]);
-            setImages([]);
-        }
+        const loadFiles = async () => {
+            try {
+                // Get files from public folder
+                const { pdfFiles, imageFiles } = getPublicFiles();
+                
+                // Update state with the files
+                setPdfs(pdfFiles);
+                setImages(imageFiles);
+                
+                // Log success message
+                console.log(`Successfully loaded ${pdfFiles.length} PDF files and ${imageFiles.length} image files`);
+                
+                if (pdfFiles.length === 0) {
+                    console.warn('No PDF files found in public/pdfs folder. Make sure PDF files are placed in the public/pdfs directory.');
+                }
+                
+                if (imageFiles.length === 0) {
+                    console.warn('No image files found in public/images folder. Make sure image files are placed in the public/images directory.');
+                }
+            } catch (error) {
+                // Log error and set empty arrays to prevent the application from crashing
+                console.error('Error loading files:', error);
+                setPdfs([]);
+                setImages([]);
+            }
+        };
+        
+        loadFiles();
+        
+        // Set up interval to check for new files every 30 seconds
+        const interval = setInterval(() => {
+            console.log('Checking for new files...');
+            loadFiles();
+        }, 30000);
+        
+        return () => clearInterval(interval);
     }, []);
 
     // Filter files based on search term
@@ -380,12 +415,20 @@ function HomePage() {
         <Layout>
             <Header className="app-header">
                 <div className="header-content">
-                    <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                        <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)' }}>
-                            Neyna
-                        </Title>
-                    </Link>
-                    <div className="nav-controls">
+                    <div className="header-left">
+                        <Button 
+                            className="mobile-menu-button"
+                            type="text" 
+                            icon={<MenuOutlined />} 
+                            onClick={() => setDrawerVisible(true)}
+                        />
+                        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+                            <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)' }}>
+                                Neyna
+                            </Title>
+                        </Link>
+                    </div>
+                    <div className="nav-controls desktop-nav">
                         <Link to="/advertise" className="contact-link">
                             <FileTextOutlined /> Advertise
                         </Link>
@@ -404,8 +447,37 @@ function HomePage() {
                             allowClear
                         />
                     </div>
+                    <Search
+                        className="search-bar mobile-search"
+                        placeholder="Search files..."
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onSearch={(value) => setSearchTerm(value)}
+                        enterButton={<SearchOutlined />}
+                        allowClear
+                    />
                 </div>
             </Header>
+
+            <Drawer
+                title="Menu"
+                placement="left"
+                onClose={() => setDrawerVisible(false)}
+                open={drawerVisible}
+                className="mobile-nav-drawer"
+                width={280}
+            >
+                <div className="mobile-nav-links">
+                    <Link to="/advertise" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
+                        <FileTextOutlined /> Advertise
+                    </Link>
+                    <Link to="/contact" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
+                        <PhoneOutlined /> Contact
+                    </Link>
+                    <Link to="/terms" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
+                        <FileTextOutlined /> Terms
+                    </Link>
+                </div>
+            </Drawer>
             <Content>
                 <div className="content-wrapper">
                     <Tabs defaultActiveKey="2" items={items} size="middle" />

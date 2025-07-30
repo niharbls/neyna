@@ -36,6 +36,34 @@
   gap: 16px;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-menu-button {
+  display: none;
+  color: white !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 18px;
+  padding: 4px 8px;
+}
+
+.mobile-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.desktop-nav {
+  display: flex;
+}
+
+.mobile-search {
+  display: none;
+}
+
 .nav-controls {
   display: flex;
   align-items: center;
@@ -63,6 +91,55 @@
   max-width: 300px;
   width: 100%;
   margin-right: 16px;
+}
+
+/* Mobile Navigation Drawer Styles */
+.mobile-nav-drawer .ant-drawer-header {
+  background-color: #ff6b00;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-nav-drawer .ant-drawer-title {
+  color: white;
+  font-weight: 600;
+}
+
+.mobile-nav-drawer .ant-drawer-close {
+  color: white;
+}
+
+.mobile-nav-drawer .ant-drawer-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: #ff6b00;
+  color: white;
+  transform: translateX(4px);
+}
+
+.mobile-nav-link .anticon {
+  font-size: 18px;
 }
 
 .ant-layout-content {
@@ -212,6 +289,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -412,39 +490,66 @@
   margin-top: 60px;
 }
 
-/* Mobile responsiveness */
-@media screen and (max-width: 480px) {
+/* Mobile responsiveness - Enhanced */
+@media screen and (max-width: 576px) {
   .ant-layout-header {
-    padding: 0 12px;
+    padding: 8px 12px;
+    height: auto;
+    min-height: 64px;
   }
 
   .ant-layout-content {
-    padding: 12px;
-    margin-top: 120px;
+    padding: 8px;
+    margin-top: 80px;
   }
 
   .content-wrapper {
     padding: 0;
   }
 
-  .nav-controls {
-    flex-direction: column;
+  .header-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0;
     width: 100%;
-    align-items: flex-start;
-    gap: 10px;
   }
 
-  .contact-link {
-    font-size: 14px;
-    padding: 4px 8px;
+  .header-left {
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  .mobile-menu-button {
+    display: flex !important;
+    margin-right: 8px;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-search {
+    display: block;
+    max-width: 200px;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .mobile-search .ant-input-search {
+    border-radius: 6px;
+  }
+
+  .app-header h2 {
+    margin: 8px 0 !important;
+    font-size: 1.4rem !important;
   }
 
   .ant-tabs {
-    padding: 12px;
-  }
-
-  .file-card {
-    padding: 12px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 12px;
   }
 
   .file-card .anticon {
@@ -453,72 +558,153 @@
 
   .file-name {
     font-size: 12px;
+    height: 36px;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .download-button {
-    font-size: 12px;
-    padding: 0 8px;
-    height: 32px;
+    font-size: 13px;
+    padding: 8px 12px;
+    height: 36px;
     width: 100%;
     margin-top: 8px;
-    font-weight: bold;
-  }
-
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px 0;
-  }
-
-  .search-bar {
-    max-width: 100%;
-    margin-right: 0;
-    margin-bottom: 8px;
-  }
-
-  .app-header h2 {
-    margin: 8px 0 !important;
+    font-weight: 600;
+    border-radius: 6px;
   }
   
   /* PDF viewer mobile styles */
   .pdf-controls {
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 6px;
     padding: 8px;
+    justify-content: center;
   }
   
   .pdf-controls .ant-btn {
-    padding: 0 8px;
+    padding: 4px 8px;
     height: 32px;
-  }
-  
-  .zoom-level {
-    min-width: 40px;
     font-size: 12px;
   }
   
+  .zoom-level {
+    min-width: 45px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
   .pdf-preview-container iframe {
-    height: 75vh;
+    height: 70vh;
+  }
+
+  /* Thumbnail adjustments for mobile */
+  .thumbnail-container {
+    height: 140px;
+  }
+
+  .file-thumbnail {
+    border-radius: 4px;
+  }
+
+  /* Mobile Navigation Drawer responsive */
+  .mobile-nav-drawer {
+    z-index: 1100;
   }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+/* Small mobile phones */
+@media screen and (max-width: 400px) {
+  .ant-layout-content {
+    margin-top: 160px;
+    padding: 6px;
+  }
+
+  .app-header h2 {
+    font-size: 1.3rem !important;
+  }
+
+  .contact-link {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .ant-tabs {
+    padding: 6px;
+    margin: 6px;
+  }
+
+  .thumbnail-container {
+    height: 120px;
+  }
+
+  .file-name {
+    font-size: 11px;
+    height: 32px;
+  }
+
+  .download-button {
+    font-size: 12px;
+    height: 34px;
+    padding: 6px 10px;
+  }
+}
+
+/* Tablet portrait */
+@media screen and (min-width: 577px) and (max-width: 768px) {
   .ant-layout-header {
     padding: 0 16px;
   }
 
   .ant-layout-content {
     padding: 16px;
-    margin-top: 70px;
+    margin-top: 80px;
+  }
+
+  .header-content {
+    gap: 16px;
+  }
+
+  .nav-controls {
+    gap: 16px;
   }
 
   .search-bar {
-    max-width: 200px;
+    max-width: 240px;
+    min-width: 200px;
+  }
+
+  .contact-link {
+    font-size: 15px;
+    padding: 6px 12px;
+  }
+
+  .ant-tabs {
+    padding: 16px;
   }
 }
 
+/* Tablet landscape */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .content-wrapper {
-    padding: 0 12px;
+    padding: 0 16px;
+  }
+
+  .ant-layout-content {
+    padding: 20px;
+  }
+
+  .search-bar {
+    max-width: 280px;
+  }
+}
+
+/* Large tablets and small laptops */
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+  .content-wrapper {
+    padding: 0 20px;
+  }
+
+  .search-bar {
+    max-width: 320px;
   }
 }
