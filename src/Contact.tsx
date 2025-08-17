@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
                   <MailOutlined className="contact-icon" />
                   <Title level={4}>Email</Title>
                   <Paragraph className="contact-detail">
-                    <a href="mailto:support@neyna.com">support@neyna.com</a>
+                    <a href="mailto: niharbaleshwar@gmail.com">niharbaleshwar@gmail.com</a>
                   </Paragraph>
                   <Paragraph className="contact-note">
                     We'll respond as soon as possible
@@ -72,8 +72,9 @@ const Contact: React.FC = () => {
                   <EnvironmentOutlined className="contact-icon" />
                   <Title level={4}>Address</Title>
                   <Paragraph className="contact-detail">
-                    123 Tech Park, Bangalore<br />
-                    Karnataka, India 560001
+                    Nitish welding work 
+                    Rameshwar nahar baleshwar, odisha<br />
+                    , India 756001
                   </Paragraph>
                   <Paragraph className="contact-note">
                     Visit us during business hours
