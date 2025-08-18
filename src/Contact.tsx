@@ -72,8 +72,11 @@ const Contact: React.FC = () => {
                   <EnvironmentOutlined className="contact-icon" />
                   <Title level={4}>Address</Title>
                   <Paragraph className="contact-detail">
-                    Nitish welding work 
-                    Rameshwar nahar baleshwar, odisha<br />
+                    Nitish welding work
+                    
+                    Rameshwar nagar
+                    baleshwa,
+                    odisha<br />
                     , India 756001
                   </Paragraph>
                   <Paragraph className="contact-note">
