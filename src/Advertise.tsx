@@ -34,8 +34,8 @@ const Advertise: React.FC = () => {
         <div style={{ maxWidth: 600, margin: '0 auto', background: '#fff', borderRadius: 8, padding: 32, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
           <Title level={2} style={{ textAlign: 'center', color: '#ff6b00' }}>Advertise with us</Title>
           <Paragraph style={{ textAlign: 'center', fontSize: 18, margin: '24px 0' }}>
-            Reach thousands of users by advertising on Neyna.<br />
-            For advertising inquiries, contact us at:
+            NITESH WELDING WORK .<br />
+      ALL INDUSTRIAL FABRICATION AND ERECTION DONE HERE, contact us at:
           </Paragraph>
           <Paragraph style={{ textAlign: 'center', fontSize: 22, fontWeight: 'bold', color: '#ff6b00', marginBottom: 0 }}>
             +91 9040 987 452
