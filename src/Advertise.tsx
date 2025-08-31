@@ -32,7 +32,7 @@ const Advertise: React.FC = () => {
       </Header>
       <Content style={{ marginTop: 64, padding: 24, minHeight: 'calc(100vh - 64px)', background: '#f5f5f5' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', background: '#fff', borderRadius: 8, padding: 32, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-          <Title level={2} style={{ textAlign: 'center', color: '#ff6b00' }}>Advertise with us</Title>
+          <Title level={2} style={{ textAlign: 'center', color: '#ff6b010' }}>Advertise with us</Title>
           <Paragraph style={{ textAlign: 'center', fontSize: 18, margin: '24px 0' }}>
             NITESH WELDING WORK .<br />
       ALL INDUSTRIAL FABRICATION AND ERECTION DONE HERE, contact us at:
