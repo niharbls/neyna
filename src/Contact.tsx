@@ -13,7 +13,7 @@ const Contact: React.FC = () => {
       <Header className="app-header contact-header">
         <div className="header-content">
           <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-            <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer' }}>
+            <Title level={2} style={{ color: 'blue', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer' }}>
               Neyna
             </Title>
           </Link>
