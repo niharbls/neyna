@@ -97,9 +97,10 @@ const Contact: React.FC = () => {
             </div>
           </Card>
         </div>
-        <a href="https://www.facebook.com/nihar pamda" target="_blank">
+        <a href="https://www.facebook.com/nihar panda" target="_blank">
   Visit us on Facebook
 </a>
+     <a href= "http://www.youtube.com/@Niteshweldingwork
 
       </Content>
     </Layout>
