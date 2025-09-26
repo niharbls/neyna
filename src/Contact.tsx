@@ -99,8 +99,9 @@ const Contact: React.FC = () => {
         </div>
         <a href="https://www.facebook.com/nihar panda" target="_blank">
   Visit us on Facebook
+          <a href= "http://www.youtube.com/@Niteshweldingwork" target="_blank">
+          visit us on youtube
 </a>
-     <a href= "http://www.youtube.com/@Niteshweldingwork
 
       </Content>
     </Layout>
