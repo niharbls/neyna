@@ -93,16 +93,17 @@ const Contact: React.FC = () => {
               Stay connected with us on social media for updates and more.
             </Paragraph>
             <div className="social-icons">
-          
+                    </div><iframe width="560" height="315" 
+  src="https://www.youtube.com/embed/VIDEO_ID" 
+  title="YouTube video player" frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen>
 
         
               {/* Social media icons would go here */}
                    
             </div><iframe width="560" height="315" 
-  src="https://www.youtube.com/embed/VIDEO_ID" 
-  title="YouTube video player" frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
+  >
 </iframe>
 
           </Card>
