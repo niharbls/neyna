@@ -93,9 +93,10 @@ const Contact: React.FC = () => {
               Stay connected with us on social media for updates and more.
             </Paragraph>
             <div className="social-icons">
-              www.facebook.com/nihar panda
-  Visit us on Facebook
-  www.youtube.com/@Niteshweldingwork
+             <a href="https://www.facebook.com/nihar ranjan panda" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width:30px;height:30px;">
+</a>
+
           visit us on youtube
               {/* Social media icons would go here */}
             </div>
