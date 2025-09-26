@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .contact-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .contact-item {
+      margin: 15px 0;
+      font-size: 18px;
+    }
+    .contact-item a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .social-icons img {
+      width: 30px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+
+    <div class="contact-item">
+      📞 WhatsApp: <a href="https://wa.me/919040987452" target="_blank">+91 9040987452</a>
+    </div>
+
+    <div class="contact-item">
+      📧 Email: <a href="mailto:niharbaleshwar@gmail.com">niharbaleshwar@gmail.com</a>
+    </div>
+
+    <div class="contact-item">
+      🔗 Social Media:
+      <div class="social-icons">
+        <a href="https://www.facebook.com/yourusername" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.youtube.com/nitishweldingwork" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Youtube_logo.png" alt="YouTube">
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
