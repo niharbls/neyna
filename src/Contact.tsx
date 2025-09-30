@@ -91,10 +91,9 @@ const Contact: React.FC = () => {
             <Title level={3} className="follow-us-title">Follow Us</Title>
             <Paragraph className="follow-us-text">
               Stay connected with us on social media for updates and more.
+              
             </Paragraph>
             <div className="social-icons">
-        
-              {/* Social media icons would go here */}
                    
             </div><iframe width="560" height="315" 
   >
