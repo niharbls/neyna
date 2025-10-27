@@ -1,0 +1,112 @@
+<!index.html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neyna</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #222;
+      color:#B51EFF ;
+    }
+    .drawer {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .drawer a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+    .sco {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: white;
+    }
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60vh;
+      background: #000;
+    }
+    .video-container video {
+      width: 80%;
+      height: auto;
+      border: 2px solid #ccc;
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .contact, .social, .terms {
+      margin: 10px 0;
+    }
+    .social a {
+      margin: 0 10px;
+      color: #0af;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>NEYNA show you everything </h1>
+    <div class="sco">Search</div>
+  </header>
+
+  <div class="drawer">
+    <strong>Folders</strong>
+    <a href="#">📄 PDF Folder</a>
+    <a href="#">🖼 Image Folder</a>
+  </div>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="your-video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <footer>
+    <div class="contact">
+      📞 Contact: +91-9040987452<br />
+      📧 Email: niharbaleshwar@gmail.com
+    </div>
+    <footer>
+      <div class="address">
+        baleshwar,odisha,india
+     <div>
+    <footer>
+    <div class="social">
+      🔗 Follow us:
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube </a>
+    </div>
+    <div class="terms">
+      📜 <a href="#" style="color: #0af;">Terms of Use</a>
+    </div>
+  </footer>
+
+</body>
+</html>
