@@ -94,7 +94,9 @@ const Contact: React.FC = () => {
               
             </Paragraph>
             <div className="social-icons">
-                   
+               <a href="#">Facebook</a>
+                <a href="#">YouTube </a>
+      
             </div><iframe width="560" height="315" 
   >
 </iframe>
