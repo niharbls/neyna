@@ -1,38 +1,86 @@
 import React from 'react';
-import {Layout, Typography, Card, Divider} from 'antd';
-import {FileTextOutlined, PhoneOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {Layout, Typography, Card, Divider, Tabs} from 'antd';
+import {FileTextOutlined, DownloadOutlined} from '@ant-design/icons';
+import {Link, useNavigate} from 'react-router-dom';
 import './Terms.css';
 
 const {Header, Content} = Layout;
 const {Title, Paragraph} = Typography;
 
 const Terms: React.FC = () => {
+    const navigate = useNavigate();
+
+    const tabItems = [
+        {
+            key: 'advertise',
+            label: (
+                <span>
+                    <FileTextOutlined /> Advertise
+                </span>
+            ),
+        },
+        {
+            key: 'downloads',
+            label: (
+                <span>
+                    <DownloadOutlined /> Download files
+                </span>
+            ),
+        },
+        {
+            key: 'terms',
+            label: (
+                <span>
+                    <FileTextOutlined /> Terms
+                </span>
+            ),
+        },
+    ];
+
+    const handleTabChange = (key: string) => {
+        switch (key) {
+            case 'advertise':
+                navigate('/');
+                break;
+            case 'downloads':
+                navigate('/downloads');
+                break;
+            case 'terms':
+                navigate('/terms');
+                break;
+        }
+    };
+
     return (
         <Layout className="terms-layout">
             <Header className="app-header terms-header">
                 <div className="header-content">
-                    <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                        <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer' }}>
-                            Neyna
+                    <Link to="/" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer', marginBottom: 0 }}>
+                            NEYNA
                         </Title>
-                    </Link>
-                    <div className="nav-controls">
-                        <Link to="/advertise" className="contact-link">
-                            <FileTextOutlined /> Advertise
-                        </Link>
-                        <Link to="/contact" className="contact-link">
-                            <PhoneOutlined /> Contact
-                        </Link>
-                        <span className="current-page">
-                          <FileTextOutlined/> Terms
+                        <span style={{ 
+                            color: 'white', 
+                            fontSize: 'clamp(0.8rem, 2vw, 1rem)', 
+                            fontWeight: 300,
+                            opacity: 0.9,
+                            marginTop: '4px'
+                        }}>
+                            show you everything
                         </span>
-                    </div>
+                    </Link>
                 </div>
             </Header>
             <Content className="terms-content">
-                <div className="terms-wrapper">
-                    <Card className="terms-card">
+                <div className="content-wrapper">
+                    <Tabs 
+                        activeKey="terms" 
+                        items={tabItems} 
+                        size="middle" 
+                        onChange={handleTabChange}
+                    />
+                    <div className="terms-wrapper">
+                        <Card className="terms-card">
                         <Title level={2}>Terms</Title>
                         <Paragraph className="terms-intro">
                             Last updated: July 17, 2025
@@ -173,6 +221,7 @@ const Terms: React.FC = () => {
                             </Paragraph>
                         </div>
                     </Card>
+                    </div>
                 </div>
             </Content>
         </Layout>

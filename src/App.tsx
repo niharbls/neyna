@@ -1,21 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import {Tabs, Layout, Typography, List, Card, Input, Button, Modal, Spin, Tooltip, Drawer} from 'antd';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import {Tabs, Layout, Typography, List, Card, Button, Modal, Spin, Tooltip} from 'antd';
 import { 
   FileOutlined, 
   PictureOutlined, 
-  SearchOutlined, 
   DownloadOutlined, 
-  PhoneOutlined,
   FullscreenOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
   ReloadOutlined,
-  FileTextOutlined,
-  MenuOutlined
+  FileTextOutlined
 } from '@ant-design/icons';
 import { Document, Page, pdfjs } from 'react-pdf';
-import Contact from './Contact';
 import Terms from './Terms';
 import Advertise from './Advertise';
 import './App.css';
@@ -24,7 +20,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
-const { Search } = Input;
 
 interface FileItem {
     name: string;
@@ -33,17 +28,14 @@ interface FileItem {
 }
 
 function HomePage() {
+    const navigate = useNavigate();
     const [pdfs, setPdfs] = useState<FileItem[]>([]);
     const [images, setImages] = useState<FileItem[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const [filteredPdfs, setFilteredPdfs] = useState<FileItem[]>([]);
-    const [filteredImages, setFilteredImages] = useState<FileItem[]>([]);
     const [previewVisible, setPreviewVisible] = useState<boolean>(false);
     const [previewItem, setPreviewItem] = useState<FileItem | null>(null);
     const [pdfZoomLevel, setPdfZoomLevel] = useState<number>(1);
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
     const pdfContainerRef = useRef<HTMLDivElement>(null);
 
     // Load files from public folder
@@ -135,17 +127,7 @@ function HomePage() {
         return () => clearInterval(interval);
     }, []);
 
-    // Filter files based on search term
-    useEffect(() => {
-        if (searchTerm === '') {
-            setFilteredPdfs(pdfs);
-            setFilteredImages(images);
-        } else {
-            const term = searchTerm.toLowerCase();
-            setFilteredPdfs(pdfs.filter(pdf => pdf.name.toLowerCase().includes(term)));
-            setFilteredImages(images.filter(image => image.name.toLowerCase().includes(term)));
-        }
-    }, [searchTerm, pdfs, images]);
+    // No search filtering needed
 
     const handleDownload = (path: string, fileName: string) => {
         // Create a temporary anchor element to trigger the download
@@ -390,24 +372,65 @@ function HomePage() {
         );
     }
 
-    const items = [
+    const tabItems = [
+        {
+            key: 'advertise',
+            label: (
+                <span>
+                    <FileTextOutlined /> Advertise
+                </span>
+            ),
+        },
+        {
+            key: 'downloads',
+            label: (
+                <span>
+                    <DownloadOutlined /> Download files
+                </span>
+            ),
+        },
+        {
+            key: 'terms',
+            label: (
+                <span>
+                    <FileTextOutlined /> Terms
+                </span>
+            ),
+        },
+    ];
+
+    const handleTabChange = (key: string) => {
+        switch (key) {
+            case 'advertise':
+                navigate('/');
+                break;
+            case 'downloads':
+                navigate('/downloads');
+                break;
+            case 'terms':
+                navigate('/terms');
+                break;
+        }
+    };
+
+    const fileTabItems = [
         {
             key: '2',
             label: (
                 <span>
-          <PictureOutlined /> Images {filteredImages.length > 0 ? `(${filteredImages.length})` : ''}
+          <PictureOutlined /> Images {images.length > 0 ? `(${images.length})` : ''}
         </span>
             ),
-            children: renderFileList(filteredImages, PictureOutlined),
+            children: renderFileList(images, PictureOutlined),
         },
         {
             key: '1',
             label: (
                 <span>
-          <FileOutlined /> PDFs {filteredPdfs.length > 0 ? `(${filteredPdfs.length})` : ''}
+          <FileOutlined /> PDFs {pdfs.length > 0 ? `(${pdfs.length})` : ''}
         </span>
             ),
-            children: renderFileList(filteredPdfs, FileOutlined),
+            children: renderFileList(pdfs, FileOutlined),
         },
     ];
 
@@ -415,72 +438,31 @@ function HomePage() {
         <Layout>
             <Header className="app-header">
                 <div className="header-content">
-                    <div className="header-left">
-                        <Button 
-                            className="mobile-menu-button"
-                            type="text" 
-                            icon={<MenuOutlined />} 
-                            onClick={() => setDrawerVisible(true)}
-                        />
-                        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                            <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)' }}>
-                                Neyna
-                            </Title>
-                        </Link>
-                    </div>
-                    <div className="nav-controls desktop-nav">
-                        <Link to="/advertise" className="contact-link">
-                            <FileTextOutlined /> Advertise
-                        </Link>
-                        <Link to="/contact" className="contact-link">
-                            <PhoneOutlined /> Contact
-                        </Link>
-                        <Link to="/terms" className="contact-link">
-                            <FileTextOutlined /> Terms
-                        </Link>
-                        <Search
-                            className="search-bar"
-                            placeholder="Search files..."
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onSearch={(value) => setSearchTerm(value)}
-                            enterButton={<SearchOutlined />}
-                            allowClear
-                        />
-                    </div>
-                    <Search
-                        className="search-bar mobile-search"
-                        placeholder="Search files..."
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        onSearch={(value) => setSearchTerm(value)}
-                        enterButton={<SearchOutlined />}
-                        allowClear
-                    />
+                    <Link to="/" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', marginBottom: 0 }}>
+                            NEYNA
+                        </Title>
+                        <span style={{ 
+                            color: 'white', 
+                            fontSize: 'clamp(0.8rem, 2vw, 1rem)', 
+                            fontWeight: 300,
+                            opacity: 0.9,
+                            marginTop: '4px'
+                        }}>
+                            show you everything
+                        </span>
+                    </Link>
                 </div>
             </Header>
-
-            <Drawer
-                title="Menu"
-                placement="left"
-                onClose={() => setDrawerVisible(false)}
-                open={drawerVisible}
-                className="mobile-nav-drawer"
-                width={280}
-            >
-                <div className="mobile-nav-links">
-                    <Link to="/advertise" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
-                        <FileTextOutlined /> Advertise
-                    </Link>
-                    <Link to="/contact" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
-                        <PhoneOutlined /> Contact
-                    </Link>
-                    <Link to="/terms" className="mobile-nav-link" onClick={() => setDrawerVisible(false)}>
-                        <FileTextOutlined /> Terms
-                    </Link>
-                </div>
-            </Drawer>
             <Content>
                 <div className="content-wrapper">
-                    <Tabs defaultActiveKey="2" items={items} size="middle" />
+                    <Tabs 
+                        activeKey="downloads" 
+                        items={tabItems} 
+                        size="middle" 
+                        onChange={handleTabChange}
+                    />
+                    <Tabs defaultActiveKey="2" items={fileTabItems} size="middle" />
                 </div>
             </Content>
 
@@ -526,12 +508,54 @@ function HomePage() {
 
 function App() {
     return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/advertise" element={<Advertise />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/terms" element={<Terms />} />
-    </Routes>
+    <>
+        <Routes>
+            <Route path="/" element={<Advertise />} />
+            <Route path="/downloads" element={<HomePage />} />
+            <Route path="/terms" element={<Terms />} />
+        </Routes>
+        
+        {/* Floating WhatsApp Button */}
+        <a 
+            href="https://wa.me/+919040987452" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+                position: 'fixed',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 1000,
+                backgroundColor: '#25D366',
+                borderRadius: '50%',
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                transition: 'all 0.3s ease',
+                textDecoration: 'none'
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.25)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+        >
+            <svg 
+                width="32" 
+                height="32" 
+                viewBox="0 0 24 24" 
+                fill="white"
+            >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+            </svg>
+        </a>
+    </>
     );
 }
 

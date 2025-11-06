@@ -1,38 +1,88 @@
 import React from 'react';
-import { Layout, Typography, Card, Row, Col, Divider } from 'antd';
-import { PhoneOutlined, MailOutlined, EnvironmentOutlined, FileTextOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Layout, Typography, Card, Row, Col, Divider, Tabs } from 'antd';
+import { PhoneOutlined, MailOutlined, EnvironmentOutlined, FileTextOutlined, DownloadOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
 import './Contact.css';
 
 const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 const Contact: React.FC = () => {
+  const navigate = useNavigate();
+
+  const tabItems = [
+    {
+      key: 'advertise',
+      label: (
+        <span>
+          <FileTextOutlined /> Advertise
+        </span>
+      ),
+    },
+    {
+      key: 'downloads',
+      label: (
+        <span>
+          <DownloadOutlined /> Download files
+        </span>
+      ),
+    },
+    {
+      key: 'contact',
+      label: (
+        <span>
+          <PhoneOutlined /> Contact
+        </span>
+      ),
+    },
+    {
+      key: 'terms',
+      label: (
+        <span>
+          <FileTextOutlined /> Terms
+        </span>
+      ),
+    },
+  ];
+
+  const handleTabChange = (key: string) => {
+    switch (key) {
+      case 'advertise':
+        navigate('/');
+        break;
+      case 'downloads':
+        navigate('/downloads');
+        break;
+      case 'contact':
+        navigate('/contact');
+        break;
+      case 'terms':
+        navigate('/terms');
+        break;
+    }
+  };
+
   return (
     <Layout className="contact-layout">
       <Header className="app-header contact-header">
         <div className="header-content">
           <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-            <Title level={2} style={{ color: 'blue', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer' }}>
+            <Title level={2} style={{ color: 'white', margin: '14px 0', fontSize: 'clamp(1.5rem, 5vw, 2rem)', cursor: 'pointer' }}>
               Neyna
             </Title>
           </Link>
-          <div className="nav-controls">
-            <Link to="/advertise" className="contact-link">
-              <FileTextOutlined /> Advertise
-            </Link>
-            <span className="current-page">
-              <PhoneOutlined /> Contact
-            </span>
-            <Link to="/terms" className="contact-link">
-              <FileTextOutlined /> Terms
-            </Link>
-          </div>
         </div>
       </Header>
       <Content className="contact-content">
-        <div className="contact-wrapper">
-          <Card className="contact-card">
+        <div className="content-wrapper">
+          <Tabs 
+            activeKey="contact" 
+            items={tabItems} 
+            size="middle" 
+            onChange={handleTabChange}
+          />
+          <div className="contact-wrapper">
+            <Card className="contact-card">
             <Title level={2}>Contact</Title>
             <Paragraph className="contact-intro">
               We're here to help! If you have any questions about our services or need assistance, please don't hesitate to reach out to us.
@@ -96,14 +146,11 @@ const Contact: React.FC = () => {
             <div className="social-icons">
                <a href="#">Facebook</a>
                 <a href="#">YouTube </a>
-      
-            </div><iframe width="560" height="315" 
-  >
-</iframe>
+            </div>
 
           </Card>
+          </div>
         </div>
-</a>
 
       </Content>
     </Layout>
