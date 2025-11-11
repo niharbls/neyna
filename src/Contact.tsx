@@ -145,7 +145,7 @@ const Contact: React.FC = () => {
             </Paragraph>
             <div className="social-icons">
                <a href="#">Facebook</a>
-                <a href="#">YouTube </a>
+                <a href="#">YouTube/@Niteshweldingwork</a>
             </div>
 
           </Card>
